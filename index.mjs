@@ -9,10 +9,6 @@ const childProcess = fork("./doWorkTime.mjs");
 
 childProcess.on("message", createTime.cpCb);
 
-app.get("/time", (req, res) => {
-  createTime.setTime(childProcess, parseInt(req.query.duration), (message) => {
-    res.send(message);
-  });
-});
+app.get("/time", controller.time(childProcess));
 
 app.listen(4000, console.log.bind(console)("listening on 4000"));
